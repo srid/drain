@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/kelseyhightower/envconfig"
 	"log"
+	"strings"
 )
 
 type Config struct {
