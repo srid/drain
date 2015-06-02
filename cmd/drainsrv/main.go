@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/bmizerany/lpx"
 	"github.com/gin-gonic/gin"
+	"github.com/srid/drain"
 	"log"
 	"net/http"
 )
@@ -41,19 +42,7 @@ func logsReceived(c *gin.Context) {
 
 func handleLog(r *http.Request) {
 	lp := lpx.NewReader(bufio.NewReader(r.Body))
-
 	for lp.Next() {
-		header := lp.Header()
-		data := lp.Bytes()
-		line := fmt.Sprintf("LOG=> %s %s %s %s %s %s %s\n",
-			string(header.PrivalVersion),
-			string(header.Time),
-			string(header.Hostname),
-			string(header.Name),
-			string(header.Procid),
-			string(header.Msgid),
-			string(data))
-
-		fmt.Printf("%s", line)
+		fmt.Printf("[LOG] %s", drain.ToString(lp.Header(), lp.Bytes()))
 	}
 }
