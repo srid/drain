@@ -36,6 +36,6 @@ func logsReceived(c *gin.Context) {
 func handleLog(r *http.Request) {
 	lp := lpx.NewReader(bufio.NewReader(r.Body))
 	for lp.Next() {
-		fmt.Printf("[LOG] %s", drain.ToString(lp.Header(), lp.Bytes()))
+		fmt.Printf("[LOG] %s", drain.Record{lp.Header(), lp.Bytes()}.String())
 	}
 }
