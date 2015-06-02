@@ -1,1 +1,1 @@
-web: srid-starter-drain
+web: drainsrv
